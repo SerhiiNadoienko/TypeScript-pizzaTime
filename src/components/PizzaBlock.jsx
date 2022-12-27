@@ -1,26 +1,33 @@
-const PizzaBlock = (props) => {
+import { useState } from 'react';
+const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
+  const [activePizza, setActivePizza] = useState(0);
+  const [activeSize, setActiveSize] = useState(0);
+
+  const typeNames = ['thin', 'traditional'];
+
   return (
-    <div class="pizza-block">
-      <img
-        class="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-        alt="Pizza"
-      />
-      <h4 class="pizza-block__title">{props.title}</h4>
-      <div class="pizza-block__selector">
+    <div className="pizza-block">
+      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      <h4 className="pizza-block__title">{title}</h4>
+      <div className="pizza-block__selector">
         <ul>
-          <li class="active">thin</li>
-          <li>traditional</li>
+          {types.map((typeID, i) => (
+            <li onClick={() => setActivePizza(i)} className={activePizza === i ? 'active' : null}>
+              {typeNames[typeID]}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li class="active">26 cm.</li>
-          <li>30 cm.</li>
-          <li>40 cm.</li>
+          {sizes.map((size, i) => (
+            <li onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>
+              {size} cm.
+            </li>
+          ))}
         </ul>
       </div>
-      <div class="pizza-block__bottom">
-        <div class="pizza-block__price">from {props.price} $</div>
-        <div class="button button--outline button--add">
+      <div className="pizza-block__bottom">
+        <div className="pizza-block__price">from {price} $</div>
+        <button className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -33,8 +40,8 @@ const PizzaBlock = (props) => {
             />
           </svg>
           <span>Add</span>
-          <i>2</i>
-        </div>
+          <i>0</i>
+        </button>
       </div>
     </div>
   );

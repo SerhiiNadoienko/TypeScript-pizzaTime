@@ -3,11 +3,22 @@
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
-
+  @media (max-width: 644px) {
+    p {
+      display: none;
+    }
+  }
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 645px) {
+      flex-direction: column;
+      .header__cart {
+        margin-top: 10px;
+      }
+    }
   }
 
   &__logo {

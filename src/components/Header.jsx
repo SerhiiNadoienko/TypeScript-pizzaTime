@@ -13,7 +13,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="header__cart">
-          <Link to="/cart.html" className="button button--cart">
+          <Link to="/cart" className="button button--cart">
             <span>12 $</span>
             <div className="button__delimiter"></div>
             <svg

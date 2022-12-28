@@ -15,6 +15,11 @@
 
     img {
       margin-right: 15px;
+      transition: all 1s;
+    }
+    img:hover {
+      transform: rotate(360deg);
+      transition: all 1s;
     }
 
     h1 {
@@ -23,6 +28,10 @@
       letter-spacing: 1%;
       text-transform: uppercase;
       font-weight: 800;
+      transition: all 0.3s;
+    }
+    h1:hover {
+      color: red;
     }
 
     p {

@@ -18,6 +18,10 @@
       color: $orange;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
+      transition: all 0.3s;
+    }
+    span:hover {
+      color: rgb(211, 139, 5);
     }
   }
 

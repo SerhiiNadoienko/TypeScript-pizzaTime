@@ -23,7 +23,9 @@ const Sort = () => {
           />
         </svg>
         <b>Sorting by:</b>
-        <span onClick={() => setIsVisible(!isVisible)}>{sorts[sortID]}</span>
+        <span style={{ userSelect: 'none' }} onClick={() => setIsVisible(!isVisible)}>
+          {sorts[sortID]}
+        </span>
       </div>
       {isVisible ? (
         <div className="sort__popup">

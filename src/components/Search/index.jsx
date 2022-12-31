@@ -1,14 +1,33 @@
-import { useContext } from 'react';
+import { useContext, useRef, useCallback, useState } from 'react';
 import { SearchContext } from '../../App';
+import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 import closeSVG from './search-close.svg';
 
 const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState('');
+  const { setSearchValue } = useContext(SearchContext);
+  const myRef = useRef(null);
+  const onClickClear = () => {
+    setSearchValue('');
+    setValue('');
+    myRef.current.focus();
+  };
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 500),
+    [],
+  );
+  const onChangeInput = (e) => {
+    setValue(e.target.value);
+    updateSearchValue(e.target.value);
+  };
+
   return (
     <div className={styles.root}>
-      {searchValue ? (
-        <img onClick={() => setSearchValue('')} className={styles.clear} src={closeSVG} alt="" />
+      {value ? (
+        <img onClick={onClickClear} className={styles.clear} src={closeSVG} alt="closeSVG" />
       ) : null}
       <svg
         className={styles.icon}
@@ -24,8 +43,9 @@ const Search = () => {
       </svg>
 
       <input
-        onChange={(e) => setSearchValue(e.target.value)}
-        value={searchValue}
+        onChange={(e) => onChangeInput(e)}
+        value={value}
+        ref={myRef}
         className={styles.input}
         placeholder="Find pizza"
         type="text"

@@ -13,6 +13,7 @@ const Search = () => {
     setValue('');
     myRef.current.focus();
   };
+  /* eslint-disable */
   const updateSearchValue = useCallback(
     debounce((str) => {
       setSearchValue(str);

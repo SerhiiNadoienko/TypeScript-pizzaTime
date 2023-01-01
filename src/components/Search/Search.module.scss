@@ -37,3 +37,26 @@
 .clear:hover {
   opacity: 1;
 }
+@media (max-width: 1156px) {
+  .input {
+    width: 250px;
+  }
+  .root {
+    left: -20px;
+  }
+  .clear {
+    left: 215px;
+  }
+  @media (max-width: 831px) {
+    .root {
+      left: 0;
+      top: 10px;
+    }
+    .input {
+      width: 300px;
+    }
+    .clear {
+      left: 260px;
+    }
+  }
+}

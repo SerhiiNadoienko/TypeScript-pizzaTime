@@ -1,8 +1,12 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 
-import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import {
+  setCategoryId,
+  setCurrentPage,
+  selectFilterState,
+  selectPizzaData,
+} from '../redux/slices/filterSlice';
 import { fetchPizzas } from '../redux/slices/pizzaSlice';
 import Sort from '../components/Sort';
 import Categories from '../components/Categories';
@@ -12,11 +16,9 @@ import Pagination from '../components/Pagination';
 import NotFoundItems from '../components/NotFoundItemsBlock';
 
 const Home = () => {
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-  const { items, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilterState);
+  const { items, status } = useSelector(selectPizzaData);
   const dispatch = useDispatch();
-
-  const { searchValue } = useContext(SearchContext);
 
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));

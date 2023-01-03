@@ -4,12 +4,12 @@ const CartEmpty = () => {
   return (
     <div className="cart cart--empty">
       <h2>
-        Your cart is empty <icon>😕</icon>
+        Your cart is empty <span>😕</span>
       </h2>
 
       <p>Go to the main page to order pizza</p>
       <img src={igame} alt="Empty cart" />
-      <Link to="/" class="button button--black">
+      <Link to="/" className="button button--black">
         <span>Go back</span>
       </Link>
     </div>

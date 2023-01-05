@@ -1,5 +1,3 @@
-import Spinner from '../../assets/Spinner-1s-217px.svg';
-
 function MySpinner() {
   return (
     <>

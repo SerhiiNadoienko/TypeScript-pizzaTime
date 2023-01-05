@@ -1,5 +1,5 @@
+import React from 'react';
 import { useEffect } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCategoryId,
@@ -15,12 +15,12 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import NotFoundItems from '../components/NotFoundItemsBlock';
 
-const Home = () => {
+const Home: React.FC = () => {
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilterState);
   const { items, status } = useSelector(selectPizzaData);
   const dispatch = useDispatch();
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
   const getPizzas = async () => {
@@ -30,6 +30,7 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         order,
         sortBy,
@@ -46,7 +47,7 @@ const Home = () => {
       <PizzaBlock {...el} />
     </Link>
   )); */
-  const pizzas = items.map((el) => <PizzaBlock key={el.id} {...el} />);
+  const pizzas = items.map((el: any) => <PizzaBlock key={el.id} {...el} />);
   const skeletons = [...new Array(4)].map((_, index) => <Skeleton key={index} />);
 
   useEffect(() => {
@@ -57,7 +58,10 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onClickCategory={(i) => dispatch(setCategoryId(i))} />
+        <Categories
+          value={categoryId}
+          onClickCategory={(i: number) => dispatch(setCategoryId(i))}
+        />
 
         <Sort />
       </div>

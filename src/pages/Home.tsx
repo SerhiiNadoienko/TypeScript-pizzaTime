@@ -23,6 +23,9 @@ const Home: React.FC = () => {
   const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
+  const onChangeCategory = (id: number) => {
+    dispatch(setCategoryId(id));
+  };
   const getPizzas = async () => {
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sort.sortProperty.replace('-', '');
@@ -58,10 +61,7 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          onClickCategory={(i: number) => dispatch(setCategoryId(i))}
-        />
+        <Categories value={categoryId} onClickCategory={onChangeCategory} />
 
         <Sort />
       </div>
@@ -76,11 +76,6 @@ const Home: React.FC = () => {
       ) : (
         <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
       )}
-      {/*  {searchValue !== '' && pizzas.length === 0 ? (
-        <NotFoundItems />
-      ) : (
-        <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
-      )} */}
 
       {categoryId === 0 ? (
         <Pagination currentPage={currentPage} onChangePage={onChangePage} />

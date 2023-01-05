@@ -1,11 +1,21 @@
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import './FullPizza.scss';
 import { Link } from 'react-router-dom';
 import MySpinner from '../components/Spinner/Spinner';
-const FullPizza = () => {
-  const [pizza, setPizza] = useState();
+
+//interface for PizzaState
+interface IPizzaState {
+  imageUrl: string;
+  title: string;
+  price: number;
+  description: string;
+}
+
+const FullPizza: React.FC = () => {
+  const [pizza, setPizza] = useState<IPizzaState>();
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -19,6 +29,7 @@ const FullPizza = () => {
       }
     }
     fetchPizza();
+    /* eslint-disable */
   }, []);
 
   if (!pizza) {

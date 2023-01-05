@@ -409,4 +409,18 @@ body {
       font-size: 18px;
     }
   }
+  @media (max-width: 716px) {
+    width: 200px;
+    h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      line-height: 40px;
+    }
+    img {
+      display: inline-block;
+      width: 200px;
+      margin: 45px auto 60px;
+    }
+  }
 }

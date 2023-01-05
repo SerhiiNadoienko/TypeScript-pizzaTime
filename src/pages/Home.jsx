@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCategoryId,
@@ -41,11 +41,12 @@ const Home = () => {
     window.scrollTo(0, 0);
   };
 
-  const pizzas = items.map((el) => (
+  /*  const pizzas = items.map((el) => (
     <Link to={`/pizza/${el.id}`} key={el.id}>
       <PizzaBlock {...el} />
     </Link>
-  ));
+  )); */
+  const pizzas = items.map((el) => <PizzaBlock key={el.id} {...el} />);
   const skeletons = [...new Array(4)].map((_, index) => <Skeleton key={index} />);
 
   useEffect(() => {
@@ -76,6 +77,7 @@ const Home = () => {
       ) : (
         <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
       )} */}
+
       {categoryId === 0 ? (
         <Pagination currentPage={currentPage} onChangePage={onChangePage} />
       ) : null}

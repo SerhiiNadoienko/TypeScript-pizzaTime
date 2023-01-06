@@ -1,13 +1,7 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  setCategoryId,
-  setCurrentPage,
-  selectFilterState,
-  selectPizzaData,
-} from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+
 import Sort from '../components/Sort';
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
@@ -15,6 +9,9 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import NotFoundItems from '../components/NotFoundItemsBlock';
 import { useAppDispatch } from '../redux/store';
+import { selectFilterState, selectPizzaData } from '../redux/filter/selectors';
+import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
+import { fetchPizzas } from '../redux/pizza/asyncActions';
 
 const Home: React.FC = () => {
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilterState);
@@ -24,9 +21,10 @@ const Home: React.FC = () => {
   const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+    /* eslint-disable */
+  }, []);
   const getPizzas = async () => {
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sort.sortProperty.replace('-', '');
@@ -63,7 +61,7 @@ const Home: React.FC = () => {
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={onChangeCategory} />
 
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">All pizzas</h2>
       {status === 'error' ? (

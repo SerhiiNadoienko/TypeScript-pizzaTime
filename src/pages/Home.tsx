@@ -2,12 +2,13 @@ import React from 'react';
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import Sort from '../components/Sort';
+/* import Sort from '../components/Sort';
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
-import NotFoundItems from '../components/NotFoundItemsBlock';
+import NotFoundItems from '../components/NotFoundItemsBlock'; */
+import { Categories, PizzaBlock, Skeleton, Pagination, Sort, NotFoundItems } from '../components';
 import { useAppDispatch } from '../redux/store';
 import { selectFilterState, selectPizzaData } from '../redux/filter/selectors';
 import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
@@ -43,11 +44,6 @@ const Home: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  /*  const pizzas = items.map((el) => (
-    <Link to={`/pizza/${el.id}`} key={el.id}>
-      <PizzaBlock {...el} />
-    </Link>
-  )); */
   const pizzas = items.map((el: any) => <PizzaBlock key={el.id} {...el} />);
   const skeletons = [...new Array(4)].map((_, index) => <Skeleton key={index} />);
 
